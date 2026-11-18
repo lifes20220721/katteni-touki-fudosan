@@ -1,0 +1,352 @@
+[
+  {
+    "prefecture": "東京都",
+    "bureau": "東京法務局",
+    "url": "https://houmukyoku.moj.go.jp/tokyo/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2025年5月27日"
+  },
+  {
+    "prefecture": "大阪府",
+    "bureau": "大阪法務局",
+    "url": "https://houmukyoku.moj.go.jp/osaka/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年4月19日"
+  },
+  {
+    "prefecture": "神奈川県",
+    "bureau": "横浜地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/yokohama/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2025年1月30日"
+  },
+  {
+    "prefecture": "北海道",
+    "bureau": "札幌法務局",
+    "url": "https://houmukyoku.moj.go.jp/sapporo/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年9月1日"
+  },
+  {
+    "prefecture": "北海道",
+    "bureau": "函館地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/hakodate/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2021年1月26日"
+  },
+  {
+    "prefecture": "岩手県",
+    "bureau": "盛岡地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/morioka/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年11月2日"
+  },
+  {
+    "prefecture": "秋田県",
+    "bureau": "秋田地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/akita/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2021年1月26日"
+  },
+  {
+    "prefecture": "青森県",
+    "bureau": "青森地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/aomori/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年2月24日"
+  },
+  {
+    "prefecture": "埼玉県",
+    "bureau": "さいたま地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/saitama/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年11月21日"
+  },
+  {
+    "prefecture": "千葉県",
+    "bureau": "千葉地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/chiba/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年1月4日"
+  },
+  {
+    "prefecture": "茨城県",
+    "bureau": "水戸地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/mito/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2023年9月20日"
+  },
+  {
+    "prefecture": "栃木県",
+    "bureau": "宇都宮地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/utsunomiya/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年8月13日"
+  },
+  {
+    "prefecture": "群馬県",
+    "bureau": "前橋地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/maebashi/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年1月4日"
+  },
+  {
+    "prefecture": "静岡県",
+    "bureau": "静岡地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/shizuoka/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年9月28日"
+  },
+  {
+    "prefecture": "山梨県",
+    "bureau": "甲府地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kofu/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2022年1月20日"
+  },
+  {
+    "prefecture": "長野県",
+    "bureau": "長野地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/nagano/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2018年1月22日"
+  },
+  {
+    "prefecture": "新潟県",
+    "bureau": "新潟地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/niigata/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年5月28日"
+  },
+  {
+    "prefecture": "愛知県",
+    "bureau": "名古屋法務局",
+    "url": "https://houmukyoku.moj.go.jp/nagoya/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年7月18日"
+  },
+  {
+    "prefecture": "三重県",
+    "bureau": "津地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/tsu/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2021年2月25日"
+  },
+  {
+    "prefecture": "岐阜県",
+    "bureau": "岐阜地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/gifu/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2020年11月24日"
+  },
+  {
+    "prefecture": "福井県",
+    "bureau": "福井地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/fukui/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2025年2月28日"
+  },
+  {
+    "prefecture": "石川県",
+    "bureau": "金沢地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kanazawa/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年11月29日"
+  },
+  {
+    "prefecture": "富山県",
+    "bureau": "富山地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/toyama/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2025年12月25日"
+  },
+  {
+    "prefecture": "京都府",
+    "bureau": "京都地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kyoto/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2022年11月18日"
+  },
+  {
+    "prefecture": "兵庫県",
+    "bureau": "神戸地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kobe/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年5月13日"
+  },
+  {
+    "prefecture": "奈良県",
+    "bureau": "奈良地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/nara/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年2月26日"
+  },
+  {
+    "prefecture": "滋賀県",
+    "bureau": "大津地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/otsu/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2025年12月8日"
+  },
+  {
+    "prefecture": "和歌山県",
+    "bureau": "和歌山地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/wakayama/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年10月1日"
+  },
+  {
+    "prefecture": "広島県",
+    "bureau": "広島法務局",
+    "url": "https://houmukyoku.moj.go.jp/hiroshima/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年1月4日"
+  },
+  {
+    "prefecture": "山口県",
+    "bureau": "山口地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/yamaguchi/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年1月4日"
+  },
+  {
+    "prefecture": "岡山県",
+    "bureau": "岡山地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/okayama/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2025年7月18日"
+  },
+  {
+    "prefecture": "鳥取県",
+    "bureau": "鳥取地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/tottori/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2022年11月29日"
+  },
+  {
+    "prefecture": "島根県",
+    "bureau": "松江地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/matsue/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年7月16日"
+  },
+  {
+    "prefecture": "香川県",
+    "bureau": "高松法務局",
+    "url": "https://houmukyoku.moj.go.jp/takamatsu/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2021年7月26日"
+  },
+  {
+    "prefecture": "徳島県",
+    "bureau": "徳島地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/tokushima/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年1月6日"
+  },
+  {
+    "prefecture": "高知県",
+    "bureau": "高知地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kochi/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年4月1日"
+  },
+  {
+    "prefecture": "愛媛県",
+    "bureau": "松山地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/matsuyama/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年5月7日"
+  },
+  {
+    "prefecture": "福岡県",
+    "bureau": "福岡法務局",
+    "url": "https://houmukyoku.moj.go.jp/fukuoka/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2023年3月17日"
+  },
+  {
+    "prefecture": "佐賀県",
+    "bureau": "佐賀地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/saga/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2013年3月14日"
+  },
+  {
+    "prefecture": "長崎県",
+    "bureau": "長崎地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/nagasaki/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2023年2月22日"
+  },
+  {
+    "prefecture": "大分県",
+    "bureau": "大分地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/oita/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年1月4日"
+  },
+  {
+    "prefecture": "熊本県",
+    "bureau": "熊本地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kumamoto/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2024年1月4日"
+  },
+  {
+    "prefecture": "鹿児島県",
+    "bureau": "鹿児島地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kagoshima/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2021年1月26日"
+  },
+  {
+    "prefecture": "宮崎県",
+    "bureau": "宮崎地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/miyazaki/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2014年1月6日"
+  },
+  {
+    "prefecture": "沖縄県",
+    "bureau": "那覇地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/naha/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2013年3月14日"
+  },
+  {
+    "prefecture": "北海道",
+    "bureau": "旭川地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/asahikawa/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2026年6月19日"
+  },
+  {
+    "prefecture": "北海道",
+    "bureau": "釧路地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/kushiro/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2025年2月25日"
+  },
+  {
+    "prefecture": "宮城県",
+    "bureau": "仙台法務局",
+    "url": "https://houmukyoku.moj.go.jp/sendai/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2022年6月29日"
+  },
+  {
+    "prefecture": "福島県",
+    "bureau": "福島地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/fukushima/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2022年2月3日"
+  },
+  {
+    "prefecture": "山形県",
+    "bureau": "山形地方法務局",
+    "url": "https://houmukyoku.moj.go.jp/yamagata/table/shikyokutou/all.html",
+    "checkedAt": "2026-11-18",
+    "pageUpdatedAt": "2021年5月6日"
+  }
+]

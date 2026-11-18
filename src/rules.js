@@ -1,6 +1,8 @@
+import {caseJurisdiction} from './jurisdiction.js';
 import {FLAGS,isDate,today} from './model.js';
-export const RULE_VERSION='2026-11-18.1';
+export const RULE_VERSION='2026-11-18.2';
 export const SOURCES=[
+ {id:'jurisdiction',title:'不動産登記の管轄案内（所在地別・各局の公式表は入力欄に表示）',url:'https://houmukyoku.moj.go.jp/homu/static/kankatsu_index.html',checkedAt:'2026-11-18',status:'全国50局の不動産登記管轄列を確認・同梱。町域の例外・変更は要最終確認'},
  {id:'forms',title:'不動産登記の申請書様式（2026年10月5日以降の欄）',url:'https://houmukyoku.moj.go.jp/homu/minji79.html',checkedAt:'2026-11-18',status:'一覧本文確認。個別PDF・全項目照合は未実施'},
  {id:'guide',title:'相続登記手続ハンドブック',url:'https://houmukyoku.moj.go.jp/homu/page7_000001_00014.html',checkedAt:'2026-11-18',status:'案内本文確認。個別案件への適用は未監修'},
  {id:'deadline',title:'相続登記の申請義務化',url:'https://www.moj.go.jp/MINJI/minji05_00599.html',checkedAt:'2026-11-18',status:'経過措置・免税期間の本文確認'},
@@ -38,6 +40,11 @@ export function evaluate(s) {
  add(!isDate(s.knownDate),'不動産を相続で取得したと知った日を入力してください。');
  add(isDate(s.knownDate)&&(s.knownDate<s.deceased.death||s.knownDate>today()),'取得を知った日と死亡日の前後関係を確認してください。');
  add(!s.office.trim()||!s.phone.trim(),'申請先の管轄法務局と連絡先を入力してください。');
+ const jurisdiction=caseJurisdiction(s.properties);
+ add(s.properties.some(p=>!p.location?.trim()),'各不動産の所在地を都道府県名から入力してください。被相続人の住所とは別に確認します。');
+ add(jurisdiction.status==='multiple','不動産ごとに管轄が異なります。申請先ごとに案件を分けてください。');
+ add(!s.officeManual&&(jurisdiction.status!=='matched'||s.office!==jurisdiction.office),'不動産所在地から管轄を確認してください。判定できない場合は公式表を確認して手入力してください。');
+ add(s.officeManual&&jurisdiction.status==='matched'&&s.office!==jurisdiction.office,'手入力の申請先が所在地からの候補と異なります。公式管轄表で確認してください。');
  const spouse=s.heirs.filter(h=>h.relation==='spouse'),child=s.heirs.filter(h=>h.relation==='child');
  add(spouse.length>1,'配偶者が複数入力されています。戸籍と照合してください。');
  add(s.heirs.some(h=>!['spouse','child'].includes(h.relation)),'親・兄弟姉妹等を含む入力、または子との混在は対象範囲外です。自動確定を停止します。');

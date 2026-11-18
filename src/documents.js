@@ -1,5 +1,5 @@
 import {evaluate,RULE_VERSION} from './rules.js';
-export const TEMPLATE_VERSION='draft-2026-11-18.1';
+export const TEMPLATE_VERSION='draft-2026-11-18.2';
 export function drafts(s) {
  const r=evaluate(s);if(!r.canDraft)return null;
  const header=`【下書き・提出不可／専門家レビュー未実施】\nテンプレート ${TEMPLATE_VERSION}・ルール ${RULE_VERSION}\n公式の個別PDF全項目との照合は未完了。管轄法務局等で確認し、公式様式へ転記・補完してください。`;
