@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#184e44">
+<meta name="description" content="相続登記の準備を、ご自身のペースで。2024年4月1日から義務化された相続登記。相続人や不動産の情報整理、必要資料の確認、申請書類の下書き作成を、ご自身で進めるための準備アプリです。">
+<title>かってに登記申請 不動産登記版｜手続の準備を、一歩ずつ</title>
+<link rel="stylesheet" href="styles.css"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml">
+<script type="module" src="src/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">入力に進む</a>
+<header><div class="brand"><span class="mark" aria-hidden="true">相</span><div>かってに登記申請<small>不動産登記版</small></div></div><span class="badge">試作版 v0.1</span></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">大切な手続を、一歩ずつ。</p><h1>相続登記の準備を、<br>ご自身のペースで。</h1><p>2024年4月1日から、相続による不動産登記が義務化されました。<br>相続で不動産を取得したことを知った日から、原則3年以内の申請が必要です。<br>ご家族と不動産の情報を整理し、必要な資料と次の手順を確認しましょう。</p><div class="privacy">入力内容はこのブラウザ内で処理します。外部への送信・自動保存は行いません。</div></section>
+<aside class="notice"><strong>提出前の準備を支援する試作版です</strong><p>専門家レビュー未実施。個別の法律相談・代理申請・提出可能性の判定は行いません。単純な「配偶者と子」または「子のみ」の相続が対象です。生成物は公式様式への転記・確認用の下書きで、そのまま提出できません。</p></aside>
+<nav class="steps" aria-label="入力の流れ"><a href="#basic">1 基本情報</a><a href="#family">2 相続人</a><a href="#estate">3 不動産</a><a href="#review">4 確認と下書き</a></nav>
+<div class="workspace"><form id="case-form" autocomplete="off" novalidate>
+<section class="card" id="basic"><p class="eyebrow">STEP 01</p><h2>基本情報を整理する</h2><p class="muted">氏名・住所は戸籍や証明書と照合してください。マイナンバーは入力しないでください。</p><div class="grid">
+<label>被相続人の氏名<input data-path="deceased.name" maxlength="200" placeholder="亡くなった方のお名前"></label>
+<label>死亡日<input type="date" data-path="deceased.death"></label>
+<label class="wide">被相続人の最後の住所<input data-path="deceased.address" maxlength="500"></label>
+<label>不動産を相続で取得したと知った日<input type="date" data-path="knownDate"></label>
+<label>申請予定日<input type="date" data-path="applicationDate"></label>
+<label>管轄の法務局<input data-path="office" maxlength="200" placeholder="所在地に応じて確認"></label>
+<label>申請の連絡先電話番号<input type="tel" data-path="phone" maxlength="50"></label>
+</div><p id="deadline" class="callout"></p></section>
+<section class="card" id="family"><p class="eyebrow">STEP 02</p><h2>相続人を確認する</h2><p class="muted">戸籍で確認した人数と入力人数を照合します。前の婚姻の子、認知された子、養子、先に亡くなった子やその子孫も確認してください。不明な場合は「確認が必要」を選びます。</p>
+<div class="grid"><label>戸籍で確認した配偶者の人数<select data-path="expectedSpouses"><option value="">未確認</option><option value="0">0人</option><option value="1">1人</option></select></label><label>戸籍で確認した子の人数<input data-path="expectedChildren" type="number" min="0" max="99" placeholder="未確認"></label></div>
+<div id="heirs"></div><button type="button" id="add-heir" class="secondary">＋ 相続人を追加</button>
+<details><summary>対象範囲外・確認が必要な事情</summary><p>該当する場合は下書きを生成しません。判断できない項目は「その他の不明点」にチェックしてください。</p><div id="flags" class="checks"></div></details></section>
+<section class="card" id="estate"><p class="eyebrow">STEP 03</p><h2>不動産と承継方法</h2><p class="muted">登記事項証明書から転記してください。区分建物・敷地権・被相続人の共有持分は未対応です。</p><div id="properties"></div><button type="button" id="add-property" class="secondary">＋ 不動産を追加</button>
+<hr><label>承継方法<select data-path="method"><option value="statutory">法定相続（参考持分による）</option><option value="agreement">遺産分割協議（全不動産を一名が取得）</option></select></label>
+<div id="agreement-fields" hidden class="grid"><label>全不動産を取得する相続人<select id="recipient" data-path="recipientId"></select></label><label>協議日<input data-path="agreementDate" type="date"></label></div>
+<p id="tax" class="callout"></p></section>
+<section class="card" id="review"><p class="eyebrow">STEP 04</p><h2>根拠資料と照合する</h2><p class="muted">入力を変更すると、以下の確認と下書きは解除されます。名前だけで相続人や申請内容を確定しないための確認です。</p>
+<div class="checks">
+<label><input type="checkbox" data-path="checks.family">被相続人の出生から死亡までの戸籍等を確認し、相続人全員と親族関係・人数を照合した</label>
+<label><input type="checkbox" data-path="checks.registry">登記事項証明書の名義人・住所とのつながり・不動産表示・所有持分を確認した</label>
+<label><input type="checkbox" data-path="checks.search">名義人となる方の検索用情報と、国籍等を証する情報・証明資料を照合した</label>
+<label><input type="checkbox" data-path="checks.scope">遺言・相続放棄・代襲・数次相続・未成年・国外関係等を確認し、対象範囲内であると確認した</label>
+<label id="agreement-check" hidden><input type="checkbox" data-path="checks.agreement">相続人全員が対象不動産と取得者について合意したことを確認した</label>
+</div><button type="button" id="generate">確認用の下書きを作成</button><p id="generate-status" role="status"></p>
+</section></form>
+<aside class="sidebar"><section class="card"><p class="eyebrow">準備の状況</p><h2>次に確認すること</h2><p id="result-status" class="status"></p><ul id="errors" aria-label="不足項目"></ul><h3>参考の法定相続分</h3><p class="muted">遺産分割後の取得持分とは異なります。</p><ul id="shares"></ul><details><summary>試作版の注意事項</summary><ul id="warnings"></ul></details></section>
+<section class="card"><h2>入力を保存・復元</h2><p class="muted">ページを閉じると入力は失われます。必要な場合だけ端末に保存してください。JSONには個人情報が含まれます。</p><div class="actions"><button type="button" id="export" class="secondary">JSONを端末に保存</button><label class="file-button">JSONを読み込む<input type="file" id="import" accept="application/json,.json"></label><button type="button" id="clear" class="text-button">入力をすべて消去</button></div><p id="file-status" role="status"></p><p id="offline-status" class="muted"></p></section></aside></div>
+<section class="card" id="checklist-section"><p class="eyebrow">資料の準備</p><h2>必要資料と取得先の目安</h2><p class="muted">一般的な一覧です。事案により追加・省略があり、取得済みのチェックだけでは資料確認完了となりません。</p><div id="checklist" class="document-grid"></div><details><summary>原本還付・提出先・提出方法</summary><p>証明書は原本添付が原則です。還付できる資料・できない資料があるため、公式様式の注意事項と管轄法務局で確認してください。相続関係説明図を添付する場合の戸籍等の返却方法も確認できます。</p><p>不動産所在地を管轄する法務局に、窓口・郵送の取扱いや必要な予約を確認してください。異なる管轄の物件を一件にまとめて提出できるとは限りません。本アプリは電子申請に対応していません。</p><a href="https://houmukyoku.moj.go.jp/homu/static/kankatsu_index.html" target="_blank" rel="noopener noreferrer">法務局の管轄を確認する ↗</a></details></section>
+<section class="card" id="draft-section" hidden><div class="section-title"><h2>確認用の下書き</h2><button id="print" type="button" class="secondary">印刷 / PDF保存</button></div><p class="notice">専門家レビュー未実施・提出不可。未確定欄を公式様式で補完してください。印刷物やPDFには個人情報が含まれます。</p><h3>登記申請書の転記用メモ</h3><pre id="application"></pre><div id="agreement-output" hidden><h3>遺産分割協議書の下書き</h3><pre id="agreement"></pre></div></section>
+<section class="card sources"><h2>公式資料と確認状況</h2><p>ルール版 2026-11-18.1。個別PDF全項目の照合と専門家監修は未実施です。リンク先は外部サイトです。入力内容はリンクに含めません。</p><ul id="sources"></ul></section>
+</main><footer>かってに登記申請 不動産登記版 v0.1 · 個人情報をサーバーに送信しません<br>司法書士PASS・行政書士PASSとは別のアプリです。</footer>
+<template id="heir-template"><fieldset class="item"><legend></legend><div class="grid"><label>続柄<select data-field="relation"><option value="child">子</option><option value="spouse">配偶者</option><option value="parent">親（対象外・確認用）</option><option value="sibling">兄弟姉妹（対象外・確認用）</option><option value="other">その他・不明</option></select></label><label>氏名<input data-field="name" maxlength="200"></label><label class="wide">住所<input data-field="address" maxlength="500"></label><label>氏名の振り仮名<input data-field="kana" maxlength="200"></label><label>生年月日<input data-field="birth" type="date"></label><label>国籍等<input data-field="nationality" maxlength="100" placeholder="例：日本"></label><label>国籍等を証する情報<input data-field="nationalityEvidence" maxlength="200" placeholder="例：本籍地記載の住民票の写し"></label><label>本人のみが使うメールアドレス<input data-field="email" type="email" maxlength="254"></label><label class="check-inline"><input data-field="noEmail" type="checkbox">メールアドレスなし</label></div><button type="button" data-remove class="text-button">この相続人を削除</button></fieldset></template>
+<template id="property-template"><fieldset class="item"><legend></legend><div class="grid"><label>種類<select data-field="kind"><option value="land">土地</option><option value="building">建物（一棟）</option><option value="other">区分建物・その他（対象外）</option></select></label><label>固定資産評価額（円）<input data-field="value" type="number" min="1" step="1" max="999999999999999" placeholder="当該年度の評価額"></label><label class="wide">不動産の表示<input data-field="description" maxlength="1000" placeholder="所在・地番/家屋番号・地目/種類・構造・面積等を証明書から転記"></label><label class="wide check-inline"><input type="checkbox" data-field="fullOwnership">登記記録で被相続人の単独所有（持分全部）と確認した</label></div><button type="button" data-remove class="text-button">この不動産を削除</button></fieldset></template>
+</body></html>
