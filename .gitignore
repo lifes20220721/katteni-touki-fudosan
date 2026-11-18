@@ -1,0 +1,8 @@
+node_modules/
+.codex-attachments/
+.env*
+*.pem
+*credentials*
+*service-account*
+*backup*.json
+exports/
