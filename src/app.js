@@ -1,7 +1,7 @@
 import {caseJurisdiction,updateCaseOffice,NATIONAL_JURISDICTION_URL} from './jurisdiction.js';
 import {blank,heir,property,FLAGS,parseState,serialize,invalidate} from './model.js';
 import {evaluate,SOURCES} from './rules.js';
-import {drafts,checklist} from './documents.js';
+import {drafts,checklist} from './documents.js?v=0.2.2';
 let state=blank();
 const $=id=>document.getElementById(id);
 function setText(id,text){$(id).textContent=text;}
