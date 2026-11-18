@@ -17,9 +17,13 @@ export function checklist(s) {
  ['address','被相続人の住所のつながりを示す資料','最後の住所地・本籍地の市区町村で住民票の除票・戸籍の附票等を確認。登記簿の住所との連続性を確認。'],
  ['heirs','相続人の戸籍・取得者の住民票等','本籍地・住所地の市区町村へ請求。全相続人の確定と登記名義人となる方の住所の証明を確認。マイナンバーの記載は不要。'],
  ['registry','登記事項証明書','法務局等で取得。所在地は住居表示と地番・家屋番号が異なる場合あり。名義人・所有権・物件表示を確認。'],
- ['valuation','当該年度の固定資産評価額が分かる資料','不動産所在地の市区町村等へ評価証明書などを請求。登記用資料の要否を管轄法務局に確認。'],
+ ['valuation','当該年度の固定資産評価額が分かる資料','まず当該年度の課税明細書の価格（評価額）欄を確認。課税標準額や税額とは異なります。不明なら所在地の市区町村（東京23区は都税事務所）に評価証明書等を請求。本人確認・相続関係書類などの要否は請求先へ確認。登記用資料の要否は管轄法務局に確認。'],
  ['nationality','検索用情報・国籍等の証明資料','2026年10月5日以降は国籍等も確認。日本国籍なら本籍地記載の住民票の写し等。証明資料の援用・必要範囲は公式案内と照合。']
  ];
  if(s.method==='agreement')items.push(['agreement','相続人全員の遺産分割協議書','全員の合意・対象不動産・取得者を確認し、署名・実印押印。下書きだけでは合意・書類完成となりません。'],['seals','相続人全員の印鑑証明書','印鑑登録のある市区町村。協議書の印影・本人情報と照合。']);
- return items.map(([id,title,guide])=>({id,title,guide}));
+ const links={
+ registry:[{title:'オンラインでの取得手順（法務局）',url:'https://houmukyoku.moj.go.jp/homu/shomeisho_000001.html'},{title:'窓口・郵送での請求方法（盛岡地方法務局の一般案内）',url:'https://houmukyoku.moj.go.jp/morioka/static/11syoumeisyo.html'}],
+ valuation:[{title:'所在地の自治体公式サイトを探す（J-LIS）',url:'https://www.j-lis.go.jp/spd/map-search/cms_1069.html'},{title:'価格・課税明細書の案内（東京都／23区内）',url:'https://www.tax.metro.tokyo.lg.jp/scene/certification/fixed_assets/gaiyo'},{title:'評価証明書の入手方法・必要書類（東京都／23区内）',url:'https://www.tax.metro.tokyo.lg.jp/scene/certification/fixed_assets/shinsei'}]
+ };
+ return items.map(([id,title,guide])=>({id,title,guide,links:links[id]||[]}));
 }

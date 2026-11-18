@@ -11,7 +11,7 @@
 </head>
 <body>
 <a class="skip" href="#main">入力に進む</a>
-<header><div class="brand"><span class="mark" aria-hidden="true">相</span><div>かってに登記申請<small>不動産登記版</small></div></div><span class="badge">試作版 v0.2</span></header>
+<header><div class="brand"><span class="mark" aria-hidden="true">相</span><div>かってに登記申請<small>不動産登記版</small></div></div><span class="badge">試作版 v0.2.1</span></header>
 <main id="main">
 <section class="hero"><p class="eyebrow">大切な手続を、一歩ずつ。</p><h1>相続登記の準備を、<br>ご自身のペースで。</h1><p>2024年4月1日から、相続による不動産登記が義務化されました。<br>相続で不動産を取得したことを知った日から、原則3年以内の申請が必要です。<br>ご家族と不動産の情報を整理し、必要な資料と次の手順を確認しましょう。</p><div class="privacy">入力内容はこのブラウザ内で処理します。外部への送信・自動保存は行いません。</div></section>
 <aside class="notice"><strong>提出前の準備を支援する試作版です</strong><p>専門家レビュー未実施。個別の法律相談・代理申請・提出可能性の判定は行いません。単純な「配偶者と子」または「子のみ」の相続が対象です。生成物は公式様式への転記・確認用の下書きで、そのまま提出できません。</p></aside>
@@ -50,7 +50,40 @@
 <section class="card" id="checklist-section"><p class="eyebrow">資料の準備</p><h2>必要資料と取得先の目安</h2><p class="muted">一般的な一覧です。事案により追加・省略があり、取得済みのチェックだけでは資料確認完了となりません。</p><div id="checklist" class="document-grid"></div><details><summary>原本還付・提出先・提出方法</summary><p>証明書は原本添付が原則です。還付できる資料・できない資料があるため、公式様式の注意事項と管轄法務局で確認してください。相続関係説明図を添付する場合の戸籍等の返却方法も確認できます。</p><p>不動産所在地を管轄する法務局に、窓口・郵送の取扱いや必要な予約を確認してください。異なる管轄の物件を一件にまとめて提出できるとは限りません。本アプリは電子申請に対応していません。</p><a href="https://houmukyoku.moj.go.jp/homu/static/kankatsu_index.html" target="_blank" rel="noopener noreferrer">法務局の管轄を確認する ↗</a></details></section>
 <section class="card" id="draft-section" hidden><div class="section-title"><h2>確認用の下書き</h2><button id="print" type="button" class="secondary">印刷 / PDF保存</button></div><p class="notice">専門家レビュー未実施・提出不可。未確定欄を公式様式で補完してください。印刷物やPDFには個人情報が含まれます。</p><h3>登記申請書の転記用メモ</h3><pre id="application"></pre><div id="agreement-output" hidden><h3>遺産分割協議書の下書き</h3><pre id="agreement"></pre></div></section>
 <section class="card sources"><h2>公式資料と確認状況</h2><p>ルール版 2026-11-18.2。個別PDF全項目の照合と専門家監修は未実施です。リンク先は外部サイトです。入力内容はリンクに含めません。</p><ul id="sources"></ul></section>
-</main><footer>かってに登記申請 不動産登記版 v0.2 · 個人情報をサーバーに送信しません<br>司法書士PASS・行政書士PASSとは別のアプリです。</footer>
+</main><footer>かってに登記申請 不動産登記版 v0.2.1 · 個人情報をサーバーに送信しません<br>司法書士PASS・行政書士PASSとは別のアプリです。</footer>
 <template id="heir-template"><fieldset class="item"><legend></legend><div class="grid"><label>続柄<select data-field="relation"><option value="child">子</option><option value="spouse">配偶者</option><option value="parent">親（対象外・確認用）</option><option value="sibling">兄弟姉妹（対象外・確認用）</option><option value="other">その他・不明</option></select></label><label>氏名<input data-field="name" maxlength="200"></label><label class="wide">住所<input data-field="address" maxlength="500"></label><label>氏名の振り仮名<input data-field="kana" maxlength="200"></label><label>生年月日<input data-field="birth" type="date"></label><label>国籍等<input data-field="nationality" maxlength="100" placeholder="例：日本"></label><label>国籍等を証する情報<input data-field="nationalityEvidence" maxlength="200" placeholder="例：本籍地記載の住民票の写し"></label><label>本人のみが使うメールアドレス<input data-field="email" type="email" maxlength="254"></label><label class="check-inline"><input data-field="noEmail" type="checkbox">メールアドレスなし</label></div><button type="button" data-remove class="text-button">この相続人を削除</button></fieldset></template>
-<template id="property-template"><fieldset class="item"><legend></legend><div class="grid"><label class="wide">この不動産の所在地<input data-field="location" maxlength="500" placeholder="都道府県名から入力（1件目は基本情報と連動）"></label><label>種類<select data-field="kind"><option value="land">土地</option><option value="building">建物（一棟）</option><option value="other">区分建物・その他（対象外）</option></select></label><label>固定資産評価額（円）<input data-field="value" type="number" min="1" step="1" max="999999999999999" placeholder="当該年度の評価額"></label><label class="wide">不動産の表示<input data-field="description" maxlength="1000" placeholder="所在・地番/家屋番号・地目/種類・構造・面積等を証明書から転記"></label><label class="wide check-inline"><input type="checkbox" data-field="fullOwnership">登記記録で被相続人の単独所有（持分全部）と確認した</label></div><button type="button" data-remove class="text-button">この不動産を削除</button></fieldset></template>
+<template id="property-template">
+<fieldset class="item"><legend></legend><div class="grid">
+<label class="wide">この不動産の所在地<input data-field="location" maxlength="500" placeholder="都道府県名から入力（1件目は基本情報と連動）"></label>
+<label>種類<select data-field="kind"><option value="land">土地</option><option value="building">建物（一棟）</option><option value="other">区分建物・その他（対象外）</option></select></label>
+<div><label>固定資産評価額（円）<input data-field="value" type="number" min="1" step="1" max="999999999999999" placeholder="当該年度の価格・評価額"></label><p class="field-hint" data-hint="value">課税明細書などの「価格（評価額）」を確認します。「課税標準額」や納める税額とは異なります。</p></div>
+<details class="wide field-guide"><summary>評価額の調べ方・評価証明書の入手方法</summary>
+<ol>
+<li>まず、当該年度の固定資産税の納税通知書に同封された<strong>課税明細書</strong>で、対象の土地・家屋の「価格」「評価額」を確認します。申請年度に対応する資料か確認してください。</li>
+<li>手元にない・評価額が分からない場合は、<strong>不動産所在地の市区町村の固定資産税担当窓口</strong>へ「相続登記に使う当該年度の固定資産評価証明書」等を問い合わせます。<strong>東京23区内は東京都の都税事務所</strong>が窓口です。</li>
+<li>自治体の公式サイトで「固定資産評価証明書」「相続人による請求」を確認します。申請書、本人確認書類、被相続人の死亡や相続関係が分かる戸籍等、代理人の委任状などが必要になる場合があります。郵送なら手数料の支払方法・返信用封筒等も確認してください。</li>
+</ol>
+<p>課税明細書で足りる場合があるため、評価証明書を取得する前に管轄法務局へ資料の要否を確認してください。請求資格・必要書類・郵送やオンラインの対応・手数料は自治体によって異なります。</p>
+<ul class="help-links">
+<li><a href="https://www.j-lis.go.jp/spd/map-search/cms_1069.html" target="_blank" rel="noopener noreferrer">所在地の自治体公式サイトを探す（J-LIS） ↗</a></li>
+<li><a href="https://www.tax.metro.tokyo.lg.jp/scene/certification/fixed_assets/gaiyo" target="_blank" rel="noopener noreferrer">価格の確認・課税明細書の案内（東京都主税局／23区内） ↗</a></li>
+<li><a href="https://www.tax.metro.tokyo.lg.jp/scene/certification/fixed_assets/shinsei" target="_blank" rel="noopener noreferrer">評価証明書の申請方法・必要書類・申請書（東京都主税局／23区内） ↗</a></li>
+</ul></details>
+<div class="wide"><label>不動産の表示<input data-field="description" maxlength="1000" placeholder="所在・地番/家屋番号・地目/種類・構造・面積等を証明書から転記"></label><p class="field-hint" data-hint="description">登記事項証明書の「表題部」から転記します。住居表示の住所と地番・家屋番号は異なることがあります。</p></div>
+<details class="wide field-guide"><summary>不動産の表示の調べ方・登記事項証明書の入手方法</summary>
+<ol>
+<li>権利証（登記済証）・登記識別情報通知・課税明細書等で、土地の<strong>所在・地番</strong>、建物の<strong>所在・家屋番号</strong>を確認します。普段使う住所だけでは物件を特定できない場合があります。不明なら法務局へ確認してください。</li>
+<li>法務局の窓口・郵送、または<strong>登記・供託オンライン申請システム</strong>から登記事項証明書を請求します。オンライン請求は利用者登録・ログイン・手数料の納付が必要で、郵送または指定した登記所等の窓口で受け取れます。請求書の書き方や郵送時の同封物は公式案内で確認してください。</li>
+<li>証明書の「表題部」にある、土地なら<strong>所在・地番・地目・地積</strong>、建物なら<strong>所在・家屋番号・種類・構造・床面積</strong>を転記します。あわせて権利部で名義人と持分を確認してください。区分建物・敷地権は現在の試作版の対象外です。</li>
+</ol>
+<p>登記情報提供サービスの閲覧情報は、登記事項証明書そのものではありません。提出資料の要否は管轄法務局に確認してください。手数料や取扱いはリンク先の最新案内をご確認ください。</p>
+<ul class="help-links">
+<li><a href="https://houmukyoku.moj.go.jp/homu/shomeisho_000001.html" target="_blank" rel="noopener noreferrer">登記事項証明書のオンライン取得手順（法務局） ↗</a></li>
+<li><a href="https://www.touki-kyoutaku-online.moj.go.jp/mtouki/" target="_blank" rel="noopener noreferrer">かんたん登記・供託申請を開く ↗</a></li>
+<li><a href="https://houmukyoku.moj.go.jp/morioka/static/11syoumeisyo.html" target="_blank" rel="noopener noreferrer">窓口・郵送での請求方法と請求書（盛岡地方法務局の一般案内） ↗</a></li>
+<li><a href="https://houmukyoku.moj.go.jp/homu/page7_000001_00014.html" target="_blank" rel="noopener noreferrer">相続登記の必要資料を確認する（法務局ハンドブック） ↗</a></li>
+</ul></details>
+<label class="wide check-inline"><input type="checkbox" data-field="fullOwnership">登記記録で被相続人の単独所有（持分全部）と確認した</label>
+</div><button type="button" data-remove class="text-button">この不動産を削除</button></fieldset>
+</template>
 </body></html>

@@ -1,4 +1,4 @@
-const CACHE='souzoku-support-v0.2.0-1';
+const CACHE='souzoku-support-v0.2.1-1';
 const FILES=['./','./index.html','./styles.css','./src/app.js','./src/model.js','./src/rules.js','./src/documents.js','./src/jurisdiction.js','./data/jurisdictions.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
 // Do not force reload a page that may hold unsaved personal information.
