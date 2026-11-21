@@ -1,33 +1,72 @@
-import {caseJurisdiction,updateCaseOffice,NATIONAL_JURISDICTION_URL} from './jurisdiction.js';
-import {blank,heir,property,FLAGS,parseState,serialize,invalidate} from './model.js';
-import {evaluate,SOURCES} from './rules.js';
-import {drafts,checklist} from './documents.js?v=0.2.2';
-let state=blank();
-const $=id=>document.getElementById(id);
+import {createCaseStore} from './state.js';
+import {createView} from './view.js';
+import {evaluate, SOURCES} from './rules.js';
+
+const store = createCaseStore();
+const $ = id => document.getElementById(id);
 function setText(id,text){$(id).textContent=text;}
-function list(id,values){$(id).replaceChildren(...values.map(v=>{const li=document.createElement('li');li.textContent=v;return li;}));}
-function readPath(path){return path.split('.').reduce((o,k)=>o[k],state);}
-function writePath(path,value){const parts=path.split('.');const k=parts.pop();parts.reduce((o,p)=>o[p],state)[k]=value;}
-function fillChecks(){document.querySelectorAll('[data-path^="checks."]').forEach(el=>{el.checked=readPath(el.dataset.path);});}
-function revoke(){invalidate(state);fillChecks();$('draft-section').hidden=true;setText('application','');setText('agreement','');setText('generate-status','入力が変更されました。資料と再照合してから下書きを作成してください。');}
-function syncLocations(){document.querySelectorAll('[data-path="properties.0.location"]').forEach(el=>el.value=state.properties[0].location||'');document.querySelectorAll('[data-field="location"]').forEach((el,i)=>el.value=state.properties[i].location||'');}
-function updateOffice(){updateCaseOffice(state);document.querySelector('[data-path="office"]').value=state.office;}
-function jurisdictionUI(){const result=caseJurisdiction(state.properties);const input=document.querySelector('[data-path="office"]');input.readOnly=!state.officeManual;input.value=state.office;setText('jurisdiction-status',state.officeManual?'手入力モードです。所在地変更時には申請先を消去します。公式の不動産登記管轄表と照合してください。 '+(result.status==='matched'?'所在地からの候補：'+result.office+'。':result.message):result.message);$('jurisdiction-links').replaceChildren();const sources=result.sources.length?result.sources:[{url:NATIONAL_JURISDICTION_URL,bureau:'全国の法務局'}];sources.forEach(source=>{const a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=source.bureau+'の公式管轄表 ↗';$('jurisdiction-links').append(a,document.createElement('br'));});}
-function recipients(){const el=$('recipient');el.replaceChildren();const empty=document.createElement('option');empty.value='';empty.textContent='取得者を選択';el.append(empty);state.heirs.forEach((h,i)=>{const option=document.createElement('option');option.value=h.id;option.textContent=h.name||`相続人${i+1}（氏名未入力）`;el.append(option);});el.value=state.recipientId;}
-function renderItems(type,templateId){const host=$(type);host.replaceChildren();state[type].forEach((item,index)=>{const node=$(templateId).content.cloneNode(true);node.querySelector('legend').textContent=`${type==='heirs'?'相続人':'不動産'} ${index+1}`;node.querySelectorAll('[data-field]').forEach(el=>{const field=el.dataset.field;el.id=`${type}-${item.id}-${field}`;const hint=node.querySelector(`[data-hint="${field}"]`);if(hint){hint.id=el.id+'-help';el.setAttribute('aria-describedby',hint.id);}if(el.type==='checkbox')el.checked=item[field];else el.value=item[field];el.addEventListener('input',()=>{item[field]=el.type==='checkbox'?el.checked:el.value;if(field==='location'){syncLocations();updateOffice();}revoke();recipients();refresh();});});const remove=node.querySelector('[data-remove]');remove.disabled=state[type].length<=1;remove.addEventListener('click',()=>{state[type].splice(index,1);if(!state.heirs.some(h=>h.id===state.recipientId))state.recipientId='';updateOffice();revoke();renderItems(type,templateId);syncLocations();recipients();refresh();});host.append(node);});}
-function renderChecklist(){const host=$('checklist');host.replaceChildren(...checklist(state).map(d=>{const box=document.createElement('div');box.className='doc';const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.checked=!!state.documents[d.id];input.addEventListener('change',()=>{state.documents[d.id]=input.checked;});label.append(input,document.createTextNode(d.title+'（取得済み）'));const p=document.createElement('p');p.textContent=d.guide;box.append(label,p);if(d.links.length){const ul=document.createElement('ul');ul.className='help-links';d.links.forEach(link=>{const li=document.createElement('li'),a=document.createElement('a');a.href=link.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=link.title+' ↗';li.append(a);ul.append(li);});box.append(ul);}return box;}));}
-function refresh(){jurisdictionUI();const r=evaluate(state);setText('deadline',r.deadline);setText('tax',r.tax.amount===null?r.tax.reason:`単純参考額：約${r.tax.amount.toLocaleString('ja-JP',{maximumFractionDigits:2})}円。${r.tax.reason}`);setText('result-status',r.canDraft?'入力・確認項目がそろいました。下書き作成後も専門家確認が必要です。':`確認が必要な項目：${r.errors.length}件`);list('errors',r.errors);list('warnings',r.warnings);list('shares',r.shares.length?r.shares.map(h=>`${h.name||'氏名未入力'}：${h.fraction}（参考）`):['対象範囲・戸籍との照合が済むまで参考持分を表示しません。']);$('agreement-fields').hidden=state.method!=='agreement';$('agreement-check').hidden=state.method!=='agreement';}
-function render(){if(!state.officeManual)state.office=caseJurisdiction(state.properties).office;document.querySelectorAll('[data-path]').forEach(el=>{const value=readPath(el.dataset.path);if(el.type==='checkbox')el.checked=value;else el.value=value;});renderItems('heirs','heir-template');renderItems('properties','property-template');recipients();renderChecklist();refresh();}
-document.querySelectorAll('[data-path]').forEach(el=>el.addEventListener('input',()=>{writePath(el.dataset.path,el.type==='checkbox'?el.checked:el.value);if(el.dataset.path==='properties.0.location'){syncLocations();updateOffice();}if(el.dataset.path==='officeManual')updateOffice();if(!el.dataset.path.startsWith('checks.'))revoke();else{$('draft-section').hidden=true;setText('application','');setText('agreement','');setText('generate-status','確認状態が変わりました。下書きは再作成してください。');}if(el.dataset.path==='method')renderChecklist();refresh();}));
-$('case-form').addEventListener('submit',e=>e.preventDefault());
-for(const [button,type,factory,template] of [['add-heir','heirs',heir,'heir-template'],['add-property','properties',property,'property-template']])$(button).addEventListener('click',()=>{if(state[type].length>=100)return;state[type].push(factory());updateOffice();revoke();renderItems(type,template);recipients();refresh();});
-Object.entries(FLAGS).forEach(([key,title])=>{const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.addEventListener('input',()=>{state.flags[key]=input.checked;revoke();refresh();});input.dataset.flag=key;label.append(input,document.createTextNode(title));$('flags').append(label);});
-$('generate').addEventListener('click',()=>{try{const valid=parseState(JSON.stringify(state)),result=drafts(valid);refresh();if(!result){setText('generate-status','下書きは生成できません。不足項目・対象範囲を確認してください。');return;}setText('application',result.application);setText('agreement',result.agreement);$('agreement-output').hidden=!result.agreement;$('draft-section').hidden=false;setText('generate-status','確認用の下書きを生成しました。提出不可・専門家レビュー未実施です。');$('draft-section').scrollIntoView({behavior:'smooth'});}catch{setText('generate-status','入力形式を確認してください。制御文字・改行等を含む入力は使用できません。');}});
-$('export').addEventListener('click',()=>{try{const blob=new Blob([serialize(state)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='souzoku-support-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setText('file-status','個人情報を含むJSONを保存しました。共有端末での保管に注意してください。');}catch{setText('file-status','保存できません。入力の形式を確認してください。');}});
-$('import').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>1000000)throw Error();const next=parseState(await file.text());state=invalidate(next);render();document.querySelectorAll('[data-flag]').forEach(el=>el.checked=state.flags[el.dataset.flag]);$('draft-section').hidden=true;setText('application','');setText('agreement','');setText('generate-status','');setText('file-status','入力を復元しました。証明資料の確認チェックは安全のため解除しました。');}catch{setText('file-status','読み込みできません。このアプリのJSON（1MB以下）を選択してください。元の入力は変更していません。');}e.target.value='';});
-$('clear').addEventListener('click',()=>{if(!confirm('この画面の入力をすべて消去します。保存していない入力は復元できません。'))return;state=blank();render();document.querySelectorAll('[data-flag]').forEach(el=>el.checked=false);$('draft-section').hidden=true;setText('application','');setText('agreement','');setText('generate-status','');setText('file-status','画面の入力を消去しました。端末に保存したJSON・PDFは必要に応じて別途削除してください。');});
-$('print').addEventListener('click',()=>{if(drafts(state)&&!$('draft-section').hidden)window.print();});
-SOURCES.forEach(s=>{const li=document.createElement('li'),a=document.createElement('a'),status=document.createElement('span');a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=s.title+' ↗';status.textContent=`${s.checkedAt?'確認日 '+s.checkedAt:'原文確認未了'}：${s.status}`;li.append(a,status);$('sources').append(li);});
-render();
-if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./service-worker.js').then(()=>setText('offline-status','オフライン用の保存を準備します。次回以降は保存済み画面を利用できます。')).catch(()=>setText('offline-status','オフライン用の保存ができませんでした。オンラインでご利用ください。'));
-else setText('offline-status','PWA・オフライン利用にはHTTPSまたはlocalhostが必要です。');
+const view = createView({onAction, sources: SOURCES});
+function paint() {
+  const state = store.getSnapshot();
+  view.paint(state, evaluate(state), store.getPreview());
+}
+function onAction(action) {
+  try {
+    store.dispatch(action);
+    setText('generate-status', '入力が変更されました。資料と再照合してから下書きを作成してください。');
+  } catch {
+    setText('generate-status', '入力形式を確認してください。元の入力は変更していません。');
+  }
+  paint();
+}
+$('case-form').addEventListener('submit', event => event.preventDefault());
+$('generate').addEventListener('click', () => {
+  const preview = store.generatePreview();
+  paint();
+  setText('generate-status', preview
+    ? '確認用の下書きを生成しました。提出不可・専門家レビュー未実施です。'
+    : '下書きは生成できません。不足項目・対象範囲を確認してください。');
+  if (preview) $('draft-section').scrollIntoView({behavior: 'smooth'});
+});
+$('export').addEventListener('click', () => {
+  const blob = new Blob([store.exportJSON()], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'souzoku-support-backup.json';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  setText('file-status', '個人情報を含むJSONを保存しました。共有端末での保管に注意してください。');
+});
+$('import').addEventListener('change', async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  try {
+    if (file.size > 1000000) throw new Error('File too large');
+    store.importJSON(await file.text());
+    paint();
+    setText('generate-status', '');
+    setText('file-status', '入力を復元しました。証明資料の確認チェックは安全のため解除しました。');
+  } catch {
+    setText('file-status', '読み込みできません。このアプリのJSON（1MB以下）を選択してください。元の入力は変更していません。');
+  }
+  event.target.value = '';
+});
+$('clear').addEventListener('click', () => {
+  if (!confirm('この画面の入力をすべて消去します。保存していない入力は復元できません。')) return;
+  store.reset();
+  paint();
+  setText('generate-status', '');
+  setText('file-status', '画面の入力を消去しました。端末に保存したJSON・PDFは必要に応じて別途削除してください。');
+});
+$('print').addEventListener('click', () => {
+  if (store.getPreview()) window.print();
+});
+paint();
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  navigator.serviceWorker.register('./service-worker.js')
+    .then(() => setText('offline-status', 'オフライン用の保存を準備します。次回以降は保存済み画面を利用できます。'))
+    .catch(() => setText('offline-status', 'オフライン用の保存ができませんでした。オンラインでご利用ください。'));
+} else {
+  setText('offline-status', 'PWA・オフライン利用にはHTTPSまたはlocalhostが必要です。');
+}
