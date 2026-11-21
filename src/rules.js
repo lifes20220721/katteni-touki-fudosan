@@ -1,3 +1,4 @@
+import {inspectHeirs} from './heirs.js';
 import {caseJurisdiction} from './jurisdiction.js';
 import {FLAGS,isDate,today} from './model.js';
 export const RULE_VERSION='2026-11-18.2';
@@ -16,8 +17,8 @@ export function deadline(s) {
  return `${s.knownDate}に取得を知った場合、原則その日から3年以内。遺産分割成立後の義務も別途確認してください。正確な期限日は個別に確認が必要です。`;
 }
 export function referenceShares(s) {
- const spouse=s.heirs.filter(h=>h.relation==='spouse'), children=s.heirs.filter(h=>h.relation==='child');
- if(spouse.length>1||!children.length||s.heirs.some(h=>!['spouse','child'].includes(h.relation))||Object.values(s.flags).some(Boolean)||!s.checks.family||!s.checks.scope||s.expectedSpouses!==String(spouse.length)||s.expectedChildren!==String(children.length))return [];
+ const {spouses:spouse,children,hasOtherRelations,countsMatch}=inspectHeirs(s);
+ if(spouse.length>1||!children.length||hasOtherRelations||Object.values(s.flags).some(Boolean)||!s.checks.family||!s.checks.scope||!countsMatch)return [];
  return s.heirs.map(h=>({id:h.id,name:h.name,fraction:h.relation==='spouse'?'1/2':`1/${children.length*(spouse.length?2:1)}`}));
 }
 export function taxEstimate(s) {
@@ -45,11 +46,11 @@ export function evaluate(s) {
  add(jurisdiction.status==='multiple','不動産ごとに管轄が異なります。申請先ごとに案件を分けてください。');
  add(!s.officeManual&&(jurisdiction.status!=='matched'||s.office!==jurisdiction.office),'不動産所在地から管轄を確認してください。判定できない場合は公式表を確認して手入力してください。');
  add(s.officeManual&&jurisdiction.status==='matched'&&s.office!==jurisdiction.office,'手入力の申請先が所在地からの候補と異なります。公式管轄表で確認してください。');
- const spouse=s.heirs.filter(h=>h.relation==='spouse'),child=s.heirs.filter(h=>h.relation==='child');
+ const {spouses:spouse,children:child,hasOtherRelations,countsMatch,hasDuplicatePeople}=inspectHeirs(s);
  add(spouse.length>1,'配偶者が複数入力されています。戸籍と照合してください。');
- add(s.heirs.some(h=>!['spouse','child'].includes(h.relation)),'親・兄弟姉妹等を含む入力、または子との混在は対象範囲外です。自動確定を停止します。');
+ add(hasOtherRelations,'親・兄弟姉妹等を含む入力、または子との混在は対象範囲外です。自動確定を停止します。');
  add(!child.length,'配偶者のみ・子がいないケースは他順位の不存在確認が必要です。現在の試作版では自動確定を停止します。');
- add(s.expectedSpouses!==String(spouse.length)||s.expectedChildren!==String(child.length),'戸籍から確認した配偶者・子の人数と入力人数を照合してください（未入力を含む）。');
+ add(!countsMatch,'戸籍から確認した配偶者・子の人数と入力人数を照合してください（未入力を含む）。');
  for(const [k,label] of Object.entries(FLAGS))add(s.flags[k],`${label}：専門家確認が必要です。下書き生成を停止します。`);
  for(const [i,h] of s.heirs.entries()) {
   const prefix=`相続人${i+1}：`;
@@ -67,7 +68,7 @@ export function evaluate(s) {
    add(h.nationality.trim()!==''&&h.nationality.trim()!=='日本',prefix+'外国籍の適用法・ローマ字氏名等は要専門家確認です。');
   }
  }
- add(s.heirs.some((h,i)=>s.heirs.slice(0,i).some(x=>x.name.trim()===h.name.trim()&&x.birth===h.birth)), '同じ氏名・生年月日の重複を確認してください。');
+ add(hasDuplicatePeople, '同じ氏名・生年月日の重複を確認してください。');
  add(!s.checks.family,'被相続人の出生から死亡までの戸籍等と、相続人全員の関係を確認してください。');
  add(!s.checks.registry,'登記事項証明書で名義人・物件表示・所有持分を照合してください。');
  add(!s.checks.scope,'対象範囲と未対応事項を確認してください。');
