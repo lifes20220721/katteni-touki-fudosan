@@ -1,5 +1,5 @@
-const CACHE='souzoku-support-v0.2.2-1';
-const FILES=['./','./index.html','./styles.css?v=0.2.2','./src/app.js?v=0.2.2','./src/model.js','./src/rules.js','./src/documents.js?v=0.2.2','./src/jurisdiction.js','./data/jurisdictions.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
+const CACHE='souzoku-support-v0.2.3-p0-1';
+const FILES=['./','./index.html','./styles.css?v=0.2.3','./src/app.js?v=0.2.3','./src/model.js','./src/heirs.js','./src/state.js','./src/view.js','./src/rules.js','./src/documents.js','./src/jurisdiction.js','./data/jurisdictions.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
 // Do not force reload a page that may hold unsaved personal information.
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('souzoku-support-')&&k!==CACHE).map(k=>caches.delete(k))))));
