@@ -1,0 +1,177 @@
+{
+  "checkedAt": "2026-11-24",
+  "method": "TinyFish fetch_content（ttl=0）。検索サービス・シェル・Chrome直取得は403。",
+  "hashScope": "sha256ExtractedTextは取得ツールのUTF-8抽出本文のハッシュ。PDF/Word原本バイナリのハッシュではない。原本保存・視覚レイアウト・Word本文照合は未了。",
+  "sources": [
+    {
+      "id": "I",
+      "title": "様式一覧",
+      "url": "https://houmukyoku.moj.go.jp/homu/minji79.html",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/minji79.html",
+      "sourceUpdatedAt": "2026-01-07（一覧見出し）／対象欄R8.9.11更新",
+      "checkedAt": "2026-11-24",
+      "scope": "2-1法定相続・遺産分割と対象PDFリンク",
+      "sha256ExtractedText": "b3662c12250b824a3f9accba6b781a741e60d01717885b38944d068b2222b5be",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "Q",
+      "title": "検索用情報の申出",
+      "url": "https://www.moj.go.jp/MINJI/minji05_00678.html",
+      "finalUrl": "https://www.moj.go.jp/MINJI/minji05_00678.html",
+      "sourceUpdatedAt": "2026-10-29",
+      "checkedAt": "2026-11-24",
+      "scope": "第1・1〜3・5(2)(3)",
+      "sha256ExtractedText": "2ddd58c085f0409312e18ad3df8b94b9075105460118e5e324c9c894520fea5a",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "L",
+      "title": "免税措置",
+      "url": "https://houmukyoku.moj.go.jp/homu/page7_000017.html",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/page7_000017.html",
+      "sourceUpdatedAt": "2026-04-01",
+      "checkedAt": "2026-11-24",
+      "scope": "(1)(2)、持分の注記・根拠条項・期限",
+      "sha256ExtractedText": "c26349970608b1ac6e2cf67aa94de8d3e735515b4075d389bf20f4162e3e9eac",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "S0",
+      "title": "法定相続・様式",
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001470088.pdf",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/content/001470088.pdf",
+      "sourceUpdatedAt": "一覧対象欄R8.9.11更新",
+      "checkedAt": "2026-11-24",
+      "scope": "全1頁の抽出本文",
+      "sha256ExtractedText": "279956b0a06d01fabb52147796bbe1d97ebfbb20e0c68a45c692f3e7b419710d",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "S",
+      "title": "法定相続・記載例",
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001471926.pdf",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/content/001471926.pdf",
+      "sourceUpdatedAt": "一覧対象欄R8.9.11更新",
+      "checkedAt": "2026-11-24",
+      "scope": "全8頁の抽出本文・注1〜17",
+      "sha256ExtractedText": "8f09869adb1e214b6c9d054e15f5d9c9ec9223af1a3d8f7e0d0bc1eb992e2d57",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "A0",
+      "title": "遺産分割・様式",
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001470092.pdf",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/content/001470092.pdf",
+      "sourceUpdatedAt": "一覧対象欄R8.9.11更新",
+      "checkedAt": "2026-11-24",
+      "scope": "全1頁の抽出本文",
+      "sha256ExtractedText": "9355cf6e8eb4b1006a4e48a6b133013b69fb712d1e0609c03a36f08203c09486",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "A",
+      "title": "遺産分割・記載例",
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001470094.pdf",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/content/001470094.pdf",
+      "sourceUpdatedAt": "一覧対象欄R8.9.11更新",
+      "checkedAt": "2026-11-24",
+      "scope": "全9頁の抽出本文・注1〜19",
+      "sha256ExtractedText": "1e57583c3c9bf8437fd4225078798295cd9eca537db79c9229579157d3b8f134",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "C",
+      "title": "登録免許税の計算",
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001467400.pdf",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/content/001467400.pdf",
+      "sourceUpdatedAt": "PDF内更新日表記未確認",
+      "checkedAt": "2026-11-24",
+      "scope": "全9頁抽出、相続は3節p4〜5・納付は8節p7〜9",
+      "sha256ExtractedText": "11fe355ac4b81f3c908bbdbf07f15d81e7052178f17cd83b4dccc45fe31fbf70",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "N",
+      "title": "国税庁・免税措置",
+      "url": "https://www.nta.go.jp/publication/pamph/sonota/0018003-081-01.pdf",
+      "finalUrl": "https://www.nta.go.jp/publication/pamph/sonota/0018003-081-01.pdf",
+      "sourceUpdatedAt": "2026-04",
+      "checkedAt": "2026-11-24",
+      "scope": "全1頁抽出、84条の2の2第1・2項",
+      "sha256ExtractedText": "74c9b35e91d32cd0b2e6cfd544e1b1c6effd9e5c00a2026c66297b17dbbfd11e",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "D",
+      "title": "相続登記の申請義務化",
+      "url": "https://www.moj.go.jp/MINJI/minji05_00599.html",
+      "finalUrl": "https://www.moj.go.jp/MINJI/minji05_00599.html",
+      "sourceUpdatedAt": "2026-04-01",
+      "checkedAt": "2026-11-24",
+      "scope": "基本的義務・追加的義務・経過措置・免税期間",
+      "sha256ExtractedText": "16a9d8a8ed9c9ef932f171f8ddf3172a5581a2542c317484fb4752fa594461c6",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "H",
+      "title": "登記手続ハンドブック案内",
+      "url": "https://houmukyoku.moj.go.jp/homu/page7_000001_00014.html",
+      "finalUrl": "https://houmukyoku.moj.go.jp/homu/page7_000001_00014.html",
+      "sourceUpdatedAt": "2026-04-10",
+      "checkedAt": "2026-11-24",
+      "scope": "案内本文のみ。リンク先ハンドブック全項目は対象外",
+      "sha256ExtractedText": "4bd84d4768fdc7e91af9359beb9c7d2df77b52c37a89f14544540820073b69bc",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    },
+    {
+      "id": "O",
+      "title": "2019年規制解釈資料（税資料ではない）",
+      "url": "https://www.moj.go.jp/content/001291200.pdf",
+      "finalUrl": "https://www.moj.go.jp/content/001291200.pdf",
+      "sourceUpdatedAt": "2019-04-19",
+      "checkedAt": "2026-11-24",
+      "scope": "全本文抽出、相続登記一般や税率の根拠ではないこと",
+      "sha256ExtractedText": "ca152e646fe681165eac2892760a083785b5069d646f0bb8de69d7e2a1405444",
+      "binarySha256": null,
+      "expertReview": "未実施"
+    }
+  ],
+  "wordAttempts": [
+    {
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001471782.docx",
+      "attemptedAt": "2026-11-24",
+      "checkedAt": null,
+      "status": "ツールの出力がZIPバイナリの文字列となり本文を照合できず。未照合。"
+    },
+    {
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001471925.docx",
+      "attemptedAt": "2026-11-24",
+      "checkedAt": null,
+      "status": "ツールの出力がZIPバイナリの文字列となり本文を照合できず。未照合。"
+    },
+    {
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001471783.docx",
+      "attemptedAt": "2026-11-24",
+      "checkedAt": null,
+      "status": "ツールの出力がZIPバイナリの文字列となり本文を照合できず。未照合。"
+    },
+    {
+      "url": "https://houmukyoku.moj.go.jp/homu/content/001470093.docx",
+      "attemptedAt": "2026-11-24",
+      "checkedAt": null,
+      "status": "ツールの出力がZIPバイナリの文字列となり本文を照合できず。未照合。"
+    }
+  ]
+}

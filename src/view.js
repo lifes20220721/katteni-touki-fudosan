@@ -1,6 +1,6 @@
 import {FLAGS} from './model.js';
 import {caseJurisdiction, NATIONAL_JURISDICTION_URL} from './jurisdiction.js';
-import {checklist} from './documents.js';
+import {checklist} from './documents.js?v=0.2.4';
 
 const $ = id => document.getElementById(id);
 const readPath = (state, path) => path.split('.').reduce((object, key) => object[key], state);
