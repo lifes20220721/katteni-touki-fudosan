@@ -1,6 +1,6 @@
 import {blank, heir, property, parseState, serialize, invalidate, FLAGS} from './model.js';
 import {caseJurisdiction, updateCaseOffice} from './jurisdiction.js';
-import {drafts} from './documents.js';
+import {drafts} from './documents.js?v=0.2.4';
 
 const CASE_FIELDS = new Set([
   'deceased.name', 'deceased.address', 'deceased.death', 'knownDate',

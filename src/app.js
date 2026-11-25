@@ -1,6 +1,6 @@
-import {createCaseStore} from './state.js';
-import {createView} from './view.js';
-import {evaluate, SOURCES} from './rules.js';
+import {createCaseStore} from './state.js?v=0.2.4';
+import {createView} from './view.js?v=0.2.4';
+import {evaluate, SOURCES} from './rules.js?v=0.2.4';
 
 const store = createCaseStore();
 const $ = id => document.getElementById(id);
